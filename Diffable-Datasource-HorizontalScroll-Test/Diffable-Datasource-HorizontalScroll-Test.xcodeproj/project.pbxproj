@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E5FFA09428F05C3000D422FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09328F05C3000D422FC /* AppDelegate.swift */; };
+		E5FFA09628F05C3000D422FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09528F05C3000D422FC /* SceneDelegate.swift */; };
+		E5FFA09828F05C3000D422FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09728F05C3000D422FC /* ViewController.swift */; };
+		E5FFA09D28F05C3100D422FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5FFA09C28F05C3100D422FC /* Assets.xcassets */; };
+		E5FFA0A028F05C3100D422FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5FFA09E28F05C3100D422FC /* LaunchScreen.storyboard */; };
+		E5FFA0AB28F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0AA28F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestTests.swift */; };
+		E5FFA0B528F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0B428F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITests.swift */; };
+		E5FFA0B728F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0B628F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift */; };
+		E5FFA0C428F05CA800D422FC /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0C328F05CA800D422FC /* SectionModel.swift */; };
+		E5FFA0C628F05D5A00D422FC /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0C528F05D5A00D422FC /* CellModel.swift */; };
+		E5FFA0CA28F0632500D422FC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0C928F0632500D422FC /* CollectionViewCell.swift */; };
+		E5FFA0CC28F063C100D422FC /* SectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E5FFA0A728F05C3100D422FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5FFA08828F05C3000D422FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5FFA08F28F05C3000D422FC;
+			remoteInfo = "Diffable-Datasource-HorizontalScroll-Test";
+		};
+		E5FFA0B128F05C3100D422FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5FFA08828F05C3000D422FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5FFA08F28F05C3000D422FC;
+			remoteInfo = "Diffable-Datasource-HorizontalScroll-Test";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E5FFA09028F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diffable-Datasource-HorizontalScroll-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5FFA09328F05C3000D422FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E5FFA09528F05C3000D422FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E5FFA09728F05C3000D422FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E5FFA09C28F05C3100D422FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5FFA09F28F05C3100D422FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E5FFA0A128F05C3100D422FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5FFA0A628F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diffable-Datasource-HorizontalScroll-TestTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5FFA0AA28F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diffable_Datasource_HorizontalScroll_TestTests.swift; sourceTree = "<group>"; };
+		E5FFA0B028F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diffable-Datasource-HorizontalScroll-TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5FFA0B428F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diffable_Datasource_HorizontalScroll_TestUITests.swift; sourceTree = "<group>"; };
+		E5FFA0B628F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E5FFA0C328F05CA800D422FC /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
+		E5FFA0C528F05D5A00D422FC /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		E5FFA0C928F0632500D422FC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusableView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E5FFA08D28F05C3000D422FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0A328F05C3100D422FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0AD28F05C3100D422FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E5FFA08728F05C3000D422FC = {
+			isa = PBXGroup;
+			children = (
+				E5FFA09228F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */,
+				E5FFA0A928F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests */,
+				E5FFA0B328F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests */,
+				E5FFA09128F05C3000D422FC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E5FFA09128F05C3000D422FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA09028F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test.app */,
+				E5FFA0A628F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests.xctest */,
+				E5FFA0B028F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E5FFA09228F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA09328F05C3000D422FC /* AppDelegate.swift */,
+				E5FFA09528F05C3000D422FC /* SceneDelegate.swift */,
+				E5FFA09728F05C3000D422FC /* ViewController.swift */,
+				E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */,
+				E5FFA0C928F0632500D422FC /* CollectionViewCell.swift */,
+				E5FFA0C328F05CA800D422FC /* SectionModel.swift */,
+				E5FFA0C528F05D5A00D422FC /* CellModel.swift */,
+				E5FFA09C28F05C3100D422FC /* Assets.xcassets */,
+				E5FFA09E28F05C3100D422FC /* LaunchScreen.storyboard */,
+				E5FFA0A128F05C3100D422FC /* Info.plist */,
+			);
+			path = "Diffable-Datasource-HorizontalScroll-Test";
+			sourceTree = "<group>";
+		};
+		E5FFA0A928F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA0AA28F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestTests.swift */,
+			);
+			path = "Diffable-Datasource-HorizontalScroll-TestTests";
+			sourceTree = "<group>";
+		};
+		E5FFA0B328F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA0B428F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITests.swift */,
+				E5FFA0B628F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift */,
+			);
+			path = "Diffable-Datasource-HorizontalScroll-TestUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E5FFA08F28F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FFA0BA28F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-Test" */;
+			buildPhases = (
+				E5FFA08C28F05C3000D422FC /* Sources */,
+				E5FFA08D28F05C3000D422FC /* Frameworks */,
+				E5FFA08E28F05C3000D422FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Diffable-Datasource-HorizontalScroll-Test";
+			packageProductDependencies = (
+			);
+			productName = "Diffable-Datasource-HorizontalScroll-Test";
+			productReference = E5FFA09028F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E5FFA0A528F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FFA0BD28F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-TestTests" */;
+			buildPhases = (
+				E5FFA0A228F05C3100D422FC /* Sources */,
+				E5FFA0A328F05C3100D422FC /* Frameworks */,
+				E5FFA0A428F05C3100D422FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5FFA0A828F05C3100D422FC /* PBXTargetDependency */,
+			);
+			name = "Diffable-Datasource-HorizontalScroll-TestTests";
+			productName = "Diffable-Datasource-HorizontalScroll-TestTests";
+			productReference = E5FFA0A628F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E5FFA0AF28F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FFA0C028F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-TestUITests" */;
+			buildPhases = (
+				E5FFA0AC28F05C3100D422FC /* Sources */,
+				E5FFA0AD28F05C3100D422FC /* Frameworks */,
+				E5FFA0AE28F05C3100D422FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5FFA0B228F05C3100D422FC /* PBXTargetDependency */,
+			);
+			name = "Diffable-Datasource-HorizontalScroll-TestUITests";
+			productName = "Diffable-Datasource-HorizontalScroll-TestUITests";
+			productReference = E5FFA0B028F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E5FFA08828F05C3000D422FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					E5FFA08F28F05C3000D422FC = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					E5FFA0A528F05C3100D422FC = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = E5FFA08F28F05C3000D422FC;
+					};
+					E5FFA0AF28F05C3100D422FC = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = E5FFA08F28F05C3000D422FC;
+					};
+				};
+			};
+			buildConfigurationList = E5FFA08B28F05C3000D422FC /* Build configuration list for PBXProject "Diffable-Datasource-HorizontalScroll-Test" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E5FFA08728F05C3000D422FC;
+			packageReferences = (
+			);
+			productRefGroup = E5FFA09128F05C3000D422FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E5FFA08F28F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */,
+				E5FFA0A528F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestTests */,
+				E5FFA0AF28F05C3100D422FC /* Diffable-Datasource-HorizontalScroll-TestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E5FFA08E28F05C3000D422FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FFA0A028F05C3100D422FC /* LaunchScreen.storyboard in Resources */,
+				E5FFA09D28F05C3100D422FC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0A428F05C3100D422FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0AE28F05C3100D422FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E5FFA08C28F05C3000D422FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FFA09828F05C3000D422FC /* ViewController.swift in Sources */,
+				E5FFA0C428F05CA800D422FC /* SectionModel.swift in Sources */,
+				E5FFA0CA28F0632500D422FC /* CollectionViewCell.swift in Sources */,
+				E5FFA0CC28F063C100D422FC /* SectionHeaderReusableView.swift in Sources */,
+				E5FFA09428F05C3000D422FC /* AppDelegate.swift in Sources */,
+				E5FFA0C628F05D5A00D422FC /* CellModel.swift in Sources */,
+				E5FFA09628F05C3000D422FC /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0A228F05C3100D422FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FFA0AB28F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FFA0AC28F05C3100D422FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FFA0B528F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITests.swift in Sources */,
+				E5FFA0B728F05C3100D422FC /* Diffable_Datasource_HorizontalScroll_TestUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5FFA0A828F05C3100D422FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5FFA08F28F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */;
+			targetProxy = E5FFA0A728F05C3100D422FC /* PBXContainerItemProxy */;
+		};
+		E5FFA0B228F05C3100D422FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5FFA08F28F05C3000D422FC /* Diffable-Datasource-HorizontalScroll-Test */;
+			targetProxy = E5FFA0B128F05C3100D422FC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E5FFA09E28F05C3100D422FC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5FFA09F28F05C3100D422FC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E5FFA0B828F05C3100D422FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E5FFA0B928F05C3100D422FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E5FFA0BB28F05C3100D422FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Diffable-Datasource-HorizontalScroll-Test/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E5FFA0BC28F05C3100D422FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Diffable-Datasource-HorizontalScroll-Test/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E5FFA0BE28F05C3100D422FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Diffable-Datasource-HorizontalScroll-Test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Diffable-Datasource-HorizontalScroll-Test";
+			};
+			name = Debug;
+		};
+		E5FFA0BF28F05C3100D422FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Diffable-Datasource-HorizontalScroll-Test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Diffable-Datasource-HorizontalScroll-Test";
+			};
+			name = Release;
+		};
+		E5FFA0C128F05C3100D422FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Diffable-Datasource-HorizontalScroll-Test";
+			};
+			name = Debug;
+		};
+		E5FFA0C228F05C3100D422FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftman.Diffable-Datasource-HorizontalScroll-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Diffable-Datasource-HorizontalScroll-Test";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E5FFA08B28F05C3000D422FC /* Build configuration list for PBXProject "Diffable-Datasource-HorizontalScroll-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FFA0B828F05C3100D422FC /* Debug */,
+				E5FFA0B928F05C3100D422FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5FFA0BA28F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FFA0BB28F05C3100D422FC /* Debug */,
+				E5FFA0BC28F05C3100D422FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5FFA0BD28F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-TestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FFA0BE28F05C3100D422FC /* Debug */,
+				E5FFA0BF28F05C3100D422FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5FFA0C028F05C3100D422FC /* Build configuration list for PBXNativeTarget "Diffable-Datasource-HorizontalScroll-TestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FFA0C128F05C3100D422FC /* Debug */,
+				E5FFA0C228F05C3100D422FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E5FFA08828F05C3000D422FC /* Project object */;
+}
