@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E5C09C9728F21E6C00B11418 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = E5C09C9628F21E6C00B11418 /* Then */; };
+		E5C09C9B28F23A5500B11418 /* EditSectionsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C09C9A28F23A5500B11418 /* EditSectionsReusableView.swift */; };
 		E5CF835B28F1DE0600109ABF /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5CF835A28F1DE0600109ABF /* ReactorKit */; };
 		E5CF835D28F1DE5800109ABF /* MainViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */; };
 		E5CF836228F1E8B700109ABF /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E5CF836128F1E8B700109ABF /* RxCocoa */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E5C09C9A28F23A5500B11418 /* EditSectionsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSectionsReusableView.swift; sourceTree = "<group>"; };
 		E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReactor.swift; sourceTree = "<group>"; };
 		E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusableViewReactor.swift; sourceTree = "<group>"; };
 		E5CF836B28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextCollectionViewCellReactor.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				E5FFA09728F05C3000D422FC /* MainViewController.swift */,
 				E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */,
+				E5C09C9A28F23A5500B11418 /* EditSectionsReusableView.swift */,
 				E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */,
 				E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */,
 				E5FFA0C928F0632500D422FC /* ImageTextCollectionViewCell.swift */,
@@ -238,6 +241,7 @@
 				E5CF836C28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift in Sources */,
 				E5FFA0C428F05CA800D422FC /* SectionModel.swift in Sources */,
 				E5FFA0CA28F0632500D422FC /* ImageTextCollectionViewCell.swift in Sources */,
+				E5C09C9B28F23A5500B11418 /* EditSectionsReusableView.swift in Sources */,
 				E5FFA0CC28F063C100D422FC /* SectionHeaderReusableView.swift in Sources */,
 				E5FFA09428F05C3000D422FC /* AppDelegate.swift in Sources */,
 				E5CF836F28F2157200109ABF /* Collection+.swift in Sources */,

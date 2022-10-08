@@ -16,6 +16,7 @@ final class ImageTextCollectionViewCell: UICollectionViewCell, View {
   override init(frame: CGRect) {
     super.init(frame: frame)
 
+    configure()
     configureTitleLabel()
   }
 
@@ -36,6 +37,12 @@ final class ImageTextCollectionViewCell: UICollectionViewCell, View {
 }
 
 extension ImageTextCollectionViewCell {
+  private func configure() {
+    contentView.backgroundColor = .systemGray
+    contentView.layer.borderWidth = 1
+    contentView.layer.cornerRadius = 4
+  }
+
   private func configureTitleLabel() {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(titleLabel)
@@ -44,9 +51,5 @@ extension ImageTextCollectionViewCell {
       titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
     ])
-
-    contentView.backgroundColor = .systemGray
-    contentView.layer.borderWidth = 1
-    contentView.layer.cornerRadius = 4
   }
 }

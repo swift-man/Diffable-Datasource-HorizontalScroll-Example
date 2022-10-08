@@ -7,6 +7,7 @@
 
 import ReactorKit
 import RxSwift
+import Then
 import UIKit
 
 typealias DataSource = UICollectionViewDiffableDataSource<SectionReactor, CellReactor>
@@ -17,9 +18,11 @@ final class MainViewController: UIViewController, View {
 //  private lazy var dataSource = configureDataSource()
 
   private var dataSource: DataSource?
-  private var currentSnapshot: Snapshot!
+  private var currentSnapshot = Snapshot()
 
-  private var collectionView: UICollectionView!
+  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,14 +41,12 @@ final class MainViewController: UIViewController, View {
       .distinctUntilChanged()
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
-        self?.applySnapshot()
+        self?.applySnapshot(animatingDifferrences: false)
       })
       .disposed(by: disposeBag)
   }
   func configureCollectionView() {
-    collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.delegate = self
     view.addSubview(collectionView)
 
     NSLayoutConstraint.activate([
@@ -56,7 +57,7 @@ final class MainViewController: UIViewController, View {
     ])
   }
 
-  func applySnapshot(animatingDifferrences: Bool = true) {
+  func applySnapshot(animatingDifferrences: Bool = true, completion: (() -> Void)? = nil) {
     print("applySnapshot :")
     guard let reactor else { return }
 
@@ -68,7 +69,10 @@ final class MainViewController: UIViewController, View {
         self.currentSnapshot.appendItems(collection.currentState.cellReactors)
       }
     }
-    self.dataSource?.apply(self.currentSnapshot, animatingDifferences: animatingDifferrences)
+
+    self.dataSource?.apply(self.currentSnapshot,
+                           animatingDifferences: animatingDifferrences,
+                           completion: completion)
   }
 
   func createLayout() -> UICollectionViewLayout {
@@ -101,7 +105,7 @@ final class MainViewController: UIViewController, View {
                        snapshot: Snapshot,
                        view: UIView) -> NSCollectionLayoutSection {
       let section = NSCollectionLayoutSection(group: group)
-      section.orthogonalScrollingBehavior = .continuous
+      section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
       if let sectionReactor = snapshot.sectionIdentifiers[safe: sectionIndex],
          !sectionReactor.currentState.cellReactors.isEmpty {
         section.interGroupSpacing = 8
@@ -118,23 +122,35 @@ final class MainViewController: UIViewController, View {
         layoutSize: titleSize,
         elementKind: SectionHeaderReusableView.elementKind,
         alignment: .top)
+
       sectionHeader.pinToVisibleBounds = true
       sectionHeader.zIndex = 2
+
+      if snapshot.numberOfSections - 1 == sectionIndex {
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+          layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .absolute(88)),
+            elementKind: EditSectionsReusableView.elementKind,
+            alignment: .bottom)
+        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+        return section
+      }
+
       section.boundarySupplementaryItems = [sectionHeader]
       return section
     }
 
     let sectionProvider = { [weak self] (sectionIndex: Int, _: NSCollectionLayoutEnvironment)
       -> NSCollectionLayoutSection? in
-      guard let self, let currentSnapshot = self.currentSnapshot else { return nil }
+      guard let self else { return nil }
 
       let item = createItem()
       let group = createGroup(at: sectionIndex,
                               with: item,
-                              snapshot: currentSnapshot)
+                              snapshot: self.currentSnapshot)
       let section = createSection(at: sectionIndex,
                                   with: group,
-                                  snapshot: currentSnapshot,
+                                  snapshot: self.currentSnapshot,
                                   view: self.view)
       return section
     }
@@ -158,22 +174,39 @@ extension MainViewController {
     }
 
     typealias SectionHeaderReusableViewRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderReusableView>
-    let supplementaryRegistration = SectionHeaderReusableViewRegistration(elementKind: SectionHeaderReusableView.elementKind) { supplementaryView, _, indexPath in
-      if let snapshot = self.currentSnapshot {
-        // Populate the view with our section's description.
-        let sectionReactor = snapshot.sectionIdentifiers[indexPath.section]
+    let supplementaryRegistration = SectionHeaderReusableViewRegistration(elementKind: SectionHeaderReusableView.elementKind) { [weak self] supplementaryView, _, indexPath in
+      if let self {
+        let sectionReactor = self.currentSnapshot.sectionIdentifiers[indexPath.section]
         supplementaryView.bind(reactor: sectionReactor)
 
         supplementaryView.plusButtonTap
           .subscribe(onNext: { [weak self] _ in
-            self?.showAlert(sectionReactor: sectionReactor)
+            self?.showAlert(sectionReactor: sectionReactor, sectionIndex: indexPath.section)
           })
           .disposed(by: supplementaryView.disposeBag)
       }
     }
 
-    dataSource?.supplementaryViewProvider = { collectionView, _, indexPath in
-      return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
+    typealias EditSectionsReusableViewRegistration = UICollectionView.SupplementaryRegistration<EditSectionsReusableView>
+    let editSectionsRegistration = EditSectionsReusableViewRegistration(elementKind: EditSectionsReusableView.elementKind) { [weak self] supplementaryView, _, _ in
+      if let self {
+        supplementaryView.plusButtonTap
+          .subscribe(onNext: { [weak self] _ in
+            print("supplementaryView.plusButtonTap")
+//            self?.showAlert(sectionReactor: sectiosnReactor, sectionIndex: indexPath.section)
+          })
+          .disposed(by: supplementaryView.disposeBag)
+      }
+    }
+
+    dataSource?.supplementaryViewProvider = { [weak self] collectionView, elementKind, indexPath in
+      if elementKind == SectionHeaderReusableView.elementKind {
+        return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
+      } else if let snapshotNumberOfSections = self?.currentSnapshot.numberOfSections, snapshotNumberOfSections - 1 == indexPath.section {
+        return collectionView.dequeueConfiguredReusableSupplementary(using: editSectionsRegistration, for: indexPath)
+      }
+
+      return nil
     }
 
     applySnapshot()
@@ -188,16 +221,32 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController {
-  private func showAlert(sectionReactor: SectionHeaderReusableViewReactor) {
+  private func showAlert(sectionReactor: SectionHeaderReusableViewReactor, sectionIndex: Int) {
     let alert = UIAlertController(title: "", message: "insert", preferredStyle: .alert)
     alert.addTextField()
     alert.addAction(UIAlertAction(title: "cancel", style: .cancel))
     alert.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
       if let text = alert.textFields?.first?.text {
         sectionReactor.action.onNext(.append(CellModel(title: text)))
-        self.applySnapshot(animatingDifferrences: true)
+        self.applySnapshot { [weak self] in
+          self?.scrollToLastCell(at: sectionIndex)
+        }
       }
     }))
     present(alert, animated: true)
+  }
+
+  private func scrollToLastCell(at sectionIndex: Int) {
+    if sectionIndex < self.collectionView.numberOfSections {
+      let item = self.collectionView.numberOfItems(inSection: sectionIndex) - 1
+      let indexPath = IndexPath(item: item, section: sectionIndex)
+      print("indexPath : \(indexPath)")
+
+      collectionView.scrollToItem(
+        at: indexPath,
+        at: [.right],
+        animated: true
+      )
+    }
   }
 }
