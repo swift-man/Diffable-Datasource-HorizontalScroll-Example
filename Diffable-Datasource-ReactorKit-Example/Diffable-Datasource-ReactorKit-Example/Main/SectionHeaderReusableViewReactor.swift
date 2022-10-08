@@ -1,6 +1,6 @@
 //
 //  SectionHeaderReusableViewReactor.swift
-//  Diffable-Datasource-HorizontalScroll-Test
+//  Diffable-Datasource-ReactorKit-Example
 //
 //  Created by SwiftMan on 2022/10/09.
 //
