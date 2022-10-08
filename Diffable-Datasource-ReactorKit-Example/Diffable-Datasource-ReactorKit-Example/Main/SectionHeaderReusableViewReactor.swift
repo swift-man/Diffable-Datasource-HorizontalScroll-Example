@@ -42,7 +42,6 @@ final class SectionHeaderReusableViewReactor: Reactor {
   func reduce(state: State, mutation: Mutation) -> State {
     var state = state
     switch mutation {
-
     case .append(let cellModel):
       state.cellReactors.append(CellReactor(cellModel: cellModel))
       return state

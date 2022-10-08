@@ -5,9 +5,9 @@
 //  Created by SwiftMan on 2022/10/07.
 //
 
-import UIKit
 import ReactorKit
 import RxSwift
+import UIKit
 
 typealias DataSource = UICollectionViewDiffableDataSource<SectionReactor, CellReactor>
 typealias Snapshot = NSDiffableDataSourceSnapshot<SectionReactor, CellReactor>
@@ -15,7 +15,7 @@ typealias Snapshot = NSDiffableDataSourceSnapshot<SectionReactor, CellReactor>
 final class MainViewController: UIViewController, View {
   var disposeBag = DisposeBag()
 //  private lazy var dataSource = configureDataSource()
-  static let titleElementKind = "title-element-kind"
+
   private var dataSource: DataSource?
   private var currentSnapshot: Snapshot!
 
@@ -66,23 +66,20 @@ final class MainViewController: UIViewController, View {
       if !collection.currentState.cellReactors.isEmpty {
         self.currentSnapshot.appendItems(collection.currentState.cellReactors)
       }
-
     }
     self.dataSource?.apply(self.currentSnapshot, animatingDifferences: animatingDifferrences)
   }
 
   func createLayout() -> UICollectionViewLayout {
-    let sectionProvider = { [weak self] (sectionIndex: Int,
-                             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+    let sectionProvider = { [weak self] (sectionIndex: Int, _: NSCollectionLayoutEnvironment)
+      -> NSCollectionLayoutSection? in
       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                             heightDimension: .fractionalHeight(1.0))
       let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//      item.edgeSpacing = .init(leading: .fixed(10), top: nil, trailing: .fixed(10), bottom: nil)
-      // if we have the space, adapt and go 2-up + peeking 3rd item
-      let groupFractionalWidth = CGFloat(layoutEnvironment.container.effectiveContentSize.width > 500 ?
-                                         0.425 : 0.85)
+
       let groupSize: NSCollectionLayoutSize
-      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex], sectionReactor.currentState.cellReactors.isEmpty {
+      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex],
+         sectionReactor.currentState.cellReactors.isEmpty {
         groupSize = NSCollectionLayoutSize(widthDimension: .absolute(0),
                                            heightDimension: .absolute(0))
       } else {
@@ -91,10 +88,11 @@ final class MainViewController: UIViewController, View {
       }
 
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-//      group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(10), top: nil, trailing: .fixed(10), bottom: nil)
+
       let section = NSCollectionLayoutSection(group: group)
       section.orthogonalScrollingBehavior = .continuous
-      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex], !sectionReactor.currentState.cellReactors.isEmpty {
+      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex],
+         !sectionReactor.currentState.cellReactors.isEmpty {
         section.interGroupSpacing = 8
       }
 
@@ -104,7 +102,7 @@ final class MainViewController: UIViewController, View {
                                              heightDimension: .absolute(47))
       let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
         layoutSize: titleSize,
-        elementKind: MainViewController.titleElementKind,
+        elementKind: SectionHeaderReusableView.elementKind,
         alignment: .top)
 //      sectionHeader.pinToVisibleBounds = true
 //      sectionHeader.zIndex = 2
@@ -124,15 +122,17 @@ final class MainViewController: UIViewController, View {
 // MARK: - UICollectionViewDataSource
 extension MainViewController {
   func configureDataSource() {
-    let cellRegistration = UICollectionView.CellRegistration<ImageTextCollectionViewCell, CellReactor> { (cell, _, cellReactor) in
+    typealias ImageTextCellRegistration = UICollectionView.CellRegistration<ImageTextCollectionViewCell, CellReactor>
+    let cellRegistration = ImageTextCellRegistration { cell, _, cellReactor in
       cell.bind(reactor: cellReactor)
     }
 
-    dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, cellModel) -> UICollectionViewCell? in
+    dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cellModel -> UICollectionViewCell? in
       return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: cellModel)
     }
 
-    let supplementaryRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderReusableView>(elementKind: MainViewController.titleElementKind) { supplementaryView, _, indexPath in
+    typealias SectionHeaderReusableViewRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderReusableView>
+    let supplementaryRegistration = SectionHeaderReusableViewRegistration(elementKind: SectionHeaderReusableView.elementKind) { supplementaryView, _, indexPath in
       if let snapshot = self.currentSnapshot {
         // Populate the view with our section's description.
         let sectionReactor = snapshot.sectionIdentifiers[indexPath.section]
@@ -171,7 +171,6 @@ extension MainViewController {
         sectionReactor.action.onNext(.append(CellModel(title: text)))
         self.applySnapshot(animatingDifferrences: true)
       }
-
     }))
     present(alert, animated: true)
   }

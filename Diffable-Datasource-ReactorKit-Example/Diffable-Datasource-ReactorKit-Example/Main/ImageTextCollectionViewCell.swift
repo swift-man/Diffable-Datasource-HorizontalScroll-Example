@@ -5,8 +5,8 @@
 //  Created by SwiftMan on 2022/10/07.
 //
 
-import UIKit
 import ReactorKit
+import UIKit
 
 final class ImageTextCollectionViewCell: UICollectionViewCell, View {
   var disposeBag = DisposeBag()
@@ -19,8 +19,9 @@ final class ImageTextCollectionViewCell: UICollectionViewCell, View {
     configureTitleLabel()
   }
 
+  @available(*, unavailable)
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    preconditionFailure("init(coder:) has not been implemented")
   }
 
   func bind(reactor: ImageTextCollectionViewCellReactor) {

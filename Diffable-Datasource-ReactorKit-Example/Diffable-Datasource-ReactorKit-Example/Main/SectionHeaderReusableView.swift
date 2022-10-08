@@ -5,12 +5,14 @@
 //  Created by SwiftMan on 2022/10/07.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import ReactorKit
+import RxCocoa
+import RxSwift
+import UIKit
 
 final class SectionHeaderReusableView: UICollectionReusableView, View {
+  static let elementKind = "SectionHeaderReusableView"
+
   var disposeBag = DisposeBag()
 
   private let label = UILabel()
@@ -27,8 +29,9 @@ final class SectionHeaderReusableView: UICollectionReusableView, View {
     configurePlusButton()
   }
 
+  @available(*, unavailable)
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    preconditionFailure("init(coder:) has not been implemented")
   }
 
   func bind(reactor: SectionHeaderReusableViewReactor) {

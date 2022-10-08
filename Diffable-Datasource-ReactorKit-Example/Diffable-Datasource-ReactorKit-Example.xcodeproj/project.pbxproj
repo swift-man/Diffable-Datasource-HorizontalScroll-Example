@@ -14,6 +14,7 @@
 		E5CF836628F1E8B700109ABF /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5CF836528F1E8B700109ABF /* RxSwift */; };
 		E5CF836A28F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */; };
 		E5CF836C28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF836B28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift */; };
+		E5CF836F28F2157200109ABF /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF836E28F2157200109ABF /* Collection+.swift */; };
 		E5FFA09428F05C3000D422FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09328F05C3000D422FC /* AppDelegate.swift */; };
 		E5FFA09628F05C3000D422FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09528F05C3000D422FC /* SceneDelegate.swift */; };
 		E5FFA09828F05C3000D422FC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFA09728F05C3000D422FC /* MainViewController.swift */; };
@@ -29,6 +30,7 @@
 		E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReactor.swift; sourceTree = "<group>"; };
 		E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusableViewReactor.swift; sourceTree = "<group>"; };
 		E5CF836B28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextCollectionViewCellReactor.swift; sourceTree = "<group>"; };
+		E5CF836E28F2157200109ABF /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		E5FFA09028F05C3000D422FC /* Diffable-Datasource-ReactorKit-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diffable-Datasource-ReactorKit-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FFA09328F05C3000D422FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5FFA09528F05C3000D422FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5CF837028F2157500109ABF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA09C28F05C3100D422FC /* Assets.xcassets */,
+				E5FFA09E28F05C3100D422FC /* LaunchScreen.storyboard */,
+				E5FFA09328F05C3000D422FC /* AppDelegate.swift */,
+				E5FFA09528F05C3000D422FC /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E5CF837128F2157A00109ABF /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				E5CF836E28F2157200109ABF /* Collection+.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
+		E5CF837228F2157F00109ABF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA09728F05C3000D422FC /* MainViewController.swift */,
+				E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */,
+				E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */,
+				E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */,
+				E5FFA0C928F0632500D422FC /* ImageTextCollectionViewCell.swift */,
+				E5CF836B28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E5CF837328F2158900109ABF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5FFA0C328F05CA800D422FC /* SectionModel.swift */,
+				E5FFA0C528F05D5A00D422FC /* CellModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E5FFA08728F05C3000D422FC = {
 			isa = PBXGroup;
 			children = (
@@ -76,18 +119,10 @@
 		E5FFA09228F05C3000D422FC /* Diffable-Datasource-ReactorKit-Example */ = {
 			isa = PBXGroup;
 			children = (
-				E5FFA09328F05C3000D422FC /* AppDelegate.swift */,
-				E5FFA09528F05C3000D422FC /* SceneDelegate.swift */,
-				E5FFA09728F05C3000D422FC /* MainViewController.swift */,
-				E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */,
-				E5FFA0CB28F063C100D422FC /* SectionHeaderReusableView.swift */,
-				E5CF836928F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift */,
-				E5FFA0C928F0632500D422FC /* ImageTextCollectionViewCell.swift */,
-				E5CF836B28F1EABC00109ABF /* ImageTextCollectionViewCellReactor.swift */,
-				E5FFA0C328F05CA800D422FC /* SectionModel.swift */,
-				E5FFA0C528F05D5A00D422FC /* CellModel.swift */,
-				E5FFA09C28F05C3100D422FC /* Assets.xcassets */,
-				E5FFA09E28F05C3100D422FC /* LaunchScreen.storyboard */,
+				E5CF837328F2158900109ABF /* Models */,
+				E5CF837228F2157F00109ABF /* Main */,
+				E5CF837128F2157A00109ABF /* Ext */,
+				E5CF837028F2157500109ABF /* App */,
 				E5FFA0A128F05C3100D422FC /* Info.plist */,
 			);
 			path = "Diffable-Datasource-ReactorKit-Example";
@@ -201,6 +236,7 @@
 				E5FFA0CA28F0632500D422FC /* ImageTextCollectionViewCell.swift in Sources */,
 				E5FFA0CC28F063C100D422FC /* SectionHeaderReusableView.swift in Sources */,
 				E5FFA09428F05C3000D422FC /* AppDelegate.swift in Sources */,
+				E5CF836F28F2157200109ABF /* Collection+.swift in Sources */,
 				E5FFA0C628F05D5A00D422FC /* CellModel.swift in Sources */,
 				E5FFA09628F05C3000D422FC /* SceneDelegate.swift in Sources */,
 				E5CF836A28F1E8D900109ABF /* SectionHeaderReusableViewReactor.swift in Sources */,

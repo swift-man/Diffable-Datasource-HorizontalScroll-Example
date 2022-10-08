@@ -16,7 +16,6 @@ final class ImageTextCollectionViewCellReactor: Reactor {
   }
 
   enum Action {
-
   }
 
   struct State: Hashable {
