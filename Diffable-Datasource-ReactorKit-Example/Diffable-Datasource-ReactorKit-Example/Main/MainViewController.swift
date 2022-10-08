@@ -26,8 +26,8 @@ final class MainViewController: UIViewController, View {
     // Do any additional setup after loading the view.
 
     navigationItem.title = "HorizontalScroll-Test"
-
-    configureHierarchy()
+    view.backgroundColor = UIColor(named: "CollectionViewBackground")
+    configureCollectionView()
 //    registerCollectionViewInSubviews()
 //    applySnapshot(animatingDifferrences: false)
     configureDataSource()
@@ -42,16 +42,17 @@ final class MainViewController: UIViewController, View {
       })
       .disposed(by: disposeBag)
   }
-  func configureHierarchy() {
+  func configureCollectionView() {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(collectionView)
 
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+      collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
 
@@ -71,50 +72,75 @@ final class MainViewController: UIViewController, View {
   }
 
   func createLayout() -> UICollectionViewLayout {
-    let sectionProvider = { [weak self] (sectionIndex: Int, _: NSCollectionLayoutEnvironment)
-      -> NSCollectionLayoutSection? in
-      let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                            heightDimension: .fractionalHeight(1.0))
+    func createItem() -> NSCollectionLayoutItem {
+      let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(100),
+                                            heightDimension: .absolute(72))
       let item = NSCollectionLayoutItem(layoutSize: itemSize)
+      return item
+    }
 
+    func createGroup(at sectionIndex: Int,
+                     with item: NSCollectionLayoutItem,
+                     snapshot: Snapshot) -> NSCollectionLayoutGroup {
       let groupSize: NSCollectionLayoutSize
-      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex],
+      if let sectionReactor = snapshot.sectionIdentifiers[safe: sectionIndex],
          sectionReactor.currentState.cellReactors.isEmpty {
         groupSize = NSCollectionLayoutSize(widthDimension: .absolute(0),
                                            heightDimension: .absolute(0))
       } else {
-        groupSize = NSCollectionLayoutSize(widthDimension: .absolute(100),
+        groupSize = NSCollectionLayoutSize(widthDimension: .estimated(1200),
                                            heightDimension: .absolute(72))
       }
 
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+      return group
+    }
 
+    func createSection(at sectionIndex: Int,
+                       with group: NSCollectionLayoutGroup,
+                       snapshot: Snapshot,
+                       view: UIView) -> NSCollectionLayoutSection {
       let section = NSCollectionLayoutSection(group: group)
       section.orthogonalScrollingBehavior = .continuous
-      if let sectionReactor = self?.currentSnapshot.sectionIdentifiers[safe: sectionIndex],
+      if let sectionReactor = snapshot.sectionIdentifiers[safe: sectionIndex],
          !sectionReactor.currentState.cellReactors.isEmpty {
         section.interGroupSpacing = 8
+
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 12,
+                                                        bottom: 12,
+                                                        trailing: 12)
       }
 
-      section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-
-      let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .absolute(47))
+      let titleSize = NSCollectionLayoutSize(widthDimension: .absolute(view.frame.width),
+                                             heightDimension: .absolute(48))
       let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
         layoutSize: titleSize,
         elementKind: SectionHeaderReusableView.elementKind,
         alignment: .top)
-//      sectionHeader.pinToVisibleBounds = true
-//      sectionHeader.zIndex = 2
+      sectionHeader.pinToVisibleBounds = true
+      sectionHeader.zIndex = 2
       section.boundarySupplementaryItems = [sectionHeader]
       return section
     }
 
-    let config = UICollectionViewCompositionalLayoutConfiguration()
-    config.interSectionSpacing = 20
+    let sectionProvider = { [weak self] (sectionIndex: Int, _: NSCollectionLayoutEnvironment)
+      -> NSCollectionLayoutSection? in
+      guard let self, let currentSnapshot = self.currentSnapshot else { return nil }
 
-    let layout = UICollectionViewCompositionalLayout(
-      sectionProvider: sectionProvider, configuration: config)
+      let item = createItem()
+      let group = createGroup(at: sectionIndex,
+                              with: item,
+                              snapshot: currentSnapshot)
+      let section = createSection(at: sectionIndex,
+                                  with: group,
+                                  snapshot: currentSnapshot,
+                                  view: self.view)
+      return section
+    }
+
+    let config = UICollectionViewCompositionalLayoutConfiguration()
+    let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider, configuration: config)
     return layout
   }
 }
@@ -174,10 +200,4 @@ extension MainViewController {
     }))
     present(alert, animated: true)
   }
-}
-
-extension Collection {
-    subscript (safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5C09C9728F21E6C00B11418 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = E5C09C9628F21E6C00B11418 /* Then */; };
 		E5CF835B28F1DE0600109ABF /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5CF835A28F1DE0600109ABF /* ReactorKit */; };
 		E5CF835D28F1DE5800109ABF /* MainViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF835C28F1DE5800109ABF /* MainViewReactor.swift */; };
 		E5CF836228F1E8B700109ABF /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E5CF836128F1E8B700109ABF /* RxCocoa */; };
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C09C9728F21E6C00B11418 /* Then in Frameworks */,
 				E5CF836428F1E8B700109ABF /* RxRelay in Frameworks */,
 				E5CF836228F1E8B700109ABF /* RxCocoa in Frameworks */,
 				E5CF836628F1E8B700109ABF /* RxSwift in Frameworks */,
@@ -150,6 +152,7 @@
 				E5CF836128F1E8B700109ABF /* RxCocoa */,
 				E5CF836328F1E8B700109ABF /* RxRelay */,
 				E5CF836528F1E8B700109ABF /* RxSwift */,
+				E5C09C9628F21E6C00B11418 /* Then */,
 			);
 			productName = "Diffable-Datasource-HorizontalScroll-Test";
 			productReference = E5FFA09028F05C3000D422FC /* Diffable-Datasource-ReactorKit-Example.app */;
@@ -182,6 +185,7 @@
 			packageReferences = (
 				E5CF835928F1DE0600109ABF /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				E5CF835E28F1E8B700109ABF /* XCRemoteSwiftPackageReference "RxSwift" */,
+				E5C09C9528F21E6C00B11418 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = E5FFA09128F05C3000D422FC /* Products */;
 			projectDirPath = "";
@@ -451,6 +455,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E5C09C9528F21E6C00B11418 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		E5CF835928F1DE0600109ABF /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
@@ -470,6 +482,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E5C09C9628F21E6C00B11418 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5C09C9528F21E6C00B11418 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
 		E5CF835A28F1DE0600109ABF /* ReactorKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E5CF835928F1DE0600109ABF /* XCRemoteSwiftPackageReference "ReactorKit" */;

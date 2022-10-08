@@ -8,6 +8,7 @@
 import ReactorKit
 import RxCocoa
 import RxSwift
+import Then
 import UIKit
 
 final class SectionHeaderReusableView: UICollectionReusableView, View {
@@ -15,18 +16,37 @@ final class SectionHeaderReusableView: UICollectionReusableView, View {
 
   var disposeBag = DisposeBag()
 
-  private let label = UILabel()
-  private let subtitleLabel = UILabel()
-  private let plusButton = UIButton(type: .custom)
+  private let titleLabel = UILabel().then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+    $0.font = .systemFont(ofSize: 14)
+    $0.textColor = UIColor(named: "Text-Dark")
+  }
+
+  private let subtitleLabel = UILabel().then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+    $0.font = .systemFont(ofSize: 12)
+    $0.textColor = UIColor(named: "Text-Red")
+  }
+  private let plusButton = UIButton(type: .custom).then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+    $0.setImage(UIImage(systemName: "plus"), for: .normal)
+  }
+
+  private let lineView = UIView().then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+    $0.backgroundColor = UIColor(named: "Text-Dark")
+  }
 
   lazy var plusButtonTap = plusButton.rx.tap
 
   override init(frame: CGRect) {
     super.init(frame: frame)
 
+    backgroundColor = .systemBackground
     configureLabel()
     configureSubtitleLabel()
     configurePlusButton()
+    configureLineView()
   }
 
   @available(*, unavailable)
@@ -37,7 +57,7 @@ final class SectionHeaderReusableView: UICollectionReusableView, View {
   func bind(reactor: SectionHeaderReusableViewReactor) {
     reactor.state.map { $0.sectionModel.title }
       .distinctUntilChanged()
-      .bind(to: label.rx.text)
+      .bind(to: titleLabel.rx.text)
       .disposed(by: disposeBag)
 
     reactor.state.map { $0.subtitle }
@@ -61,42 +81,41 @@ final class SectionHeaderReusableView: UICollectionReusableView, View {
 
 extension SectionHeaderReusableView {
   private func configureLabel() {
-    addSubview(label)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    //    label.adjustsFontForContentSizeCategory = true
+    addSubview(titleLabel)
 
     NSLayoutConstraint.activate([
-      label.leadingAnchor.constraint(equalTo: leadingAnchor),
-      label.topAnchor.constraint(equalTo: topAnchor),
-      label.bottomAnchor.constraint(equalTo: bottomAnchor)
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+      titleLabel.topAnchor.constraint(equalTo: topAnchor),
+      titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
-    //    label.font = UIFont.preferredFont(forTextStyle: .title3)
   }
 
   private func configureSubtitleLabel() {
     addSubview(subtitleLabel)
-    subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    subtitleLabel.textColor = .systemPink
-
-    let inset = CGFloat(8)
     NSLayoutConstraint.activate([
-      subtitleLabel.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: inset),
-      subtitleLabel.topAnchor.constraint(equalTo: topAnchor),
-      subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+      subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
+      subtitleLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
     ])
   }
 
   private func configurePlusButton() {
-    backgroundColor = .systemBackground
-    plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
-    plusButton.translatesAutoresizingMaskIntoConstraints = false
     addSubview(plusButton)
     NSLayoutConstraint.activate([
-      plusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
-      plusButton.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-      plusButton.widthAnchor.constraint(equalToConstant: 44),
-      plusButton.heightAnchor.constraint(equalToConstant: 44)
+      plusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+      plusButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+      plusButton.widthAnchor.constraint(equalToConstant: 23),
+      plusButton.heightAnchor.constraint(equalToConstant: 23)
+    ])
+  }
+
+  private func configureLineView() {
+    addSubview(lineView)
+    NSLayoutConstraint.activate([
+      lineView.topAnchor.constraint(equalTo: topAnchor),
+      lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      lineView.heightAnchor.constraint(equalToConstant: 1)
     ])
   }
 }
