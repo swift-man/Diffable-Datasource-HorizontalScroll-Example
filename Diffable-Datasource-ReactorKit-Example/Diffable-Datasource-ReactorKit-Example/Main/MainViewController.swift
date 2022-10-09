@@ -29,7 +29,8 @@ final class MainViewController: UIViewController, View {
     // Do any additional setup after loading the view.
 
     navigationItem.title = "HorizontalScroll-Test"
-    view.backgroundColor = UIColor(named: "CollectionViewBackground")
+
+    view.backgroundColor = .systemBackground
     configureCollectionView()
 //    registerCollectionViewInSubviews()
 //    applySnapshot(animatingDifferrences: false)
@@ -46,6 +47,7 @@ final class MainViewController: UIViewController, View {
       .disposed(by: disposeBag)
   }
   func configureCollectionView() {
+//    collectionView.backgroundColor = UIColor(named: "CollectionViewBackground")
     collectionView.delegate = self
     view.addSubview(collectionView)
 
@@ -128,8 +130,8 @@ final class MainViewController: UIViewController, View {
 
       if snapshot.numberOfSections - 1 == sectionIndex {
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
-          layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .absolute(88)),
+          layoutSize: NSCollectionLayoutSize(widthDimension: .absolute(view.frame.width),
+                                             heightDimension: .absolute(103)),
             elementKind: EditSectionsReusableView.elementKind,
             alignment: .bottom)
         section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
@@ -164,50 +166,59 @@ final class MainViewController: UIViewController, View {
 // MARK: - UICollectionViewDataSource
 extension MainViewController {
   func configureDataSource() {
-    typealias ImageTextCellRegistration = UICollectionView.CellRegistration<ImageTextCollectionViewCell, CellReactor>
-    let cellRegistration = ImageTextCellRegistration { cell, _, cellReactor in
-      cell.bind(reactor: cellReactor)
-    }
+    func configureCells() {
+      typealias ImageTextCellRegistration = UICollectionView.CellRegistration<ImageTextCollectionViewCell, CellReactor>
+      let imageTextCellRegistration = ImageTextCellRegistration { cell, _, cellReactor in
+        cell.bind(reactor: cellReactor)
+      }
 
-    dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cellModel -> UICollectionViewCell? in
-      return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: cellModel)
-    }
-
-    typealias SectionHeaderReusableViewRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderReusableView>
-    let supplementaryRegistration = SectionHeaderReusableViewRegistration(elementKind: SectionHeaderReusableView.elementKind) { [weak self] supplementaryView, _, indexPath in
-      if let self {
-        let sectionReactor = self.currentSnapshot.sectionIdentifiers[indexPath.section]
-        supplementaryView.bind(reactor: sectionReactor)
-
-        supplementaryView.plusButtonTap
-          .subscribe(onNext: { [weak self] _ in
-            self?.showAlert(sectionReactor: sectionReactor, sectionIndex: indexPath.section)
-          })
-          .disposed(by: supplementaryView.disposeBag)
+      dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, cellReactor -> UICollectionViewCell? in
+        return collectionView.dequeueConfiguredReusableCell(using: imageTextCellRegistration,
+                                                            for: indexPath,
+                                                            item: cellReactor)
       }
     }
 
-    typealias EditSectionsReusableViewRegistration = UICollectionView.SupplementaryRegistration<EditSectionsReusableView>
-    let editSectionsRegistration = EditSectionsReusableViewRegistration(elementKind: EditSectionsReusableView.elementKind) { [weak self] supplementaryView, _, _ in
-      if let self {
-        supplementaryView.plusButtonTap
-          .subscribe(onNext: { [weak self] _ in
-            print("supplementaryView.plusButtonTap")
-//            self?.showAlert(sectionReactor: sectiosnReactor, sectionIndex: indexPath.section)
-          })
-          .disposed(by: supplementaryView.disposeBag)
+    func configureSections() {
+      typealias SectionHeaderReusableViewRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderReusableView>
+      let supplementaryRegistration = SectionHeaderReusableViewRegistration(elementKind: SectionHeaderReusableView.elementKind) { [weak self] supplementaryView, _, indexPath in
+        if let self {
+          let sectionReactor = self.currentSnapshot.sectionIdentifiers[indexPath.section]
+          supplementaryView.bind(reactor: sectionReactor)
+
+          supplementaryView.plusButtonTap
+            .subscribe(onNext: { [weak self] _ in
+              self?.showAddCellAlert(sectionReactor: sectionReactor, sectionIndex: indexPath.section)
+            })
+            .disposed(by: supplementaryView.disposeBag)
+        }
+      }
+
+      typealias EditSectionsReusableViewRegistration = UICollectionView.SupplementaryRegistration<EditSectionsReusableView>
+      let editSectionsRegistration = EditSectionsReusableViewRegistration(elementKind: EditSectionsReusableView.elementKind) { [weak self] supplementaryView, _, _ in
+        if let self {
+          supplementaryView.plusButtonTap
+            .subscribe(onNext: { [weak self] _ in
+              print("supplementaryView.plusButtonTap")
+  //            self?.showAlert(sectionReactor: sectiosnReactor, sectionIndex: indexPath.section)
+            })
+            .disposed(by: supplementaryView.disposeBag)
+        }
+      }
+
+      dataSource?.supplementaryViewProvider = { [weak self] collectionView, elementKind, indexPath in
+        if elementKind == SectionHeaderReusableView.elementKind {
+          return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
+        } else if let snapshotNumberOfSections = self?.currentSnapshot.numberOfSections, snapshotNumberOfSections - 1 == indexPath.section {
+          return collectionView.dequeueConfiguredReusableSupplementary(using: editSectionsRegistration, for: indexPath)
+        }
+
+        return nil
       }
     }
 
-    dataSource?.supplementaryViewProvider = { [weak self] collectionView, elementKind, indexPath in
-      if elementKind == SectionHeaderReusableView.elementKind {
-        return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
-      } else if let snapshotNumberOfSections = self?.currentSnapshot.numberOfSections, snapshotNumberOfSections - 1 == indexPath.section {
-        return collectionView.dequeueConfiguredReusableSupplementary(using: editSectionsRegistration, for: indexPath)
-      }
-
-      return nil
-    }
+    configureCells()
+    configureSections()
 
     applySnapshot()
   }
@@ -217,21 +228,96 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print(#function)
+
+    let actionSheet = UIAlertController(title: nil,
+                                        message: nil,
+                                        preferredStyle: .actionSheet)
+    actionSheet.addAction(UIAlertAction(title: "Edit",
+                                        style: .default,
+                                        handler: { _ in
+      self.showEditCellAlert(indexPath: indexPath)
+    }))
+
+    actionSheet.addAction(UIAlertAction(title: "Delete",
+                                        style: .destructive,
+                                        handler: { _ in
+      self.showDeleteAlert(indexPath: indexPath)
+    }))
+    actionSheet.addAction(UIAlertAction(title: "Cancel",
+                                        style: .cancel))
+    present(actionSheet, animated: true)
   }
 }
 
 extension MainViewController {
-  private func showAlert(sectionReactor: SectionHeaderReusableViewReactor, sectionIndex: Int) {
-    let alert = UIAlertController(title: "", message: "insert", preferredStyle: .alert)
-    alert.addTextField()
+  private func showAddCellAlert(sectionReactor: SectionHeaderReusableViewReactor, sectionIndex: Int) {
+    let alert = UIAlertController(title: nil,
+                                  message: "add cell",
+                                  preferredStyle: .alert)
+    alert.addTextField(configurationHandler: { textField in
+      textField.placeholder = "title"
+    })
+    alert.addTextField(configurationHandler: { textField in
+      textField.placeholder = "number"
+    })
     alert.addAction(UIAlertAction(title: "cancel", style: .cancel))
     alert.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
-      if let text = alert.textFields?.first?.text {
-        sectionReactor.action.onNext(.append(CellModel(title: text)))
+      if let title = alert.textFields?.first?.text {
+        let number = Int(alert.textFields?.last?.text ?? "1") ?? 1
+        let newCellModel = CellModel(title: title, count: number)
+        sectionReactor.action.onNext(.append(newCellModel))
         self.applySnapshot { [weak self] in
           self?.scrollToLastCell(at: sectionIndex)
         }
       }
+    }))
+    present(alert, animated: true)
+  }
+
+  private func showEditCellAlert(indexPath: IndexPath) {
+    guard let sectionReactor = currentSnapshot.sectionIdentifiers[safe: indexPath.section],
+          let cellReactor = sectionReactor.currentState.cellReactors[safe: indexPath.item]
+    else { return }
+
+    let alert = UIAlertController(title: nil,
+                                  message: "edit cell",
+                                  preferredStyle: .alert)
+    alert.addTextField(configurationHandler: { textField in
+      textField.text = cellReactor.currentState.cellModel.title
+      textField.placeholder = "title"
+    })
+    alert.addTextField(configurationHandler: { textField in
+      textField.text = "\(cellReactor.currentState.cellModel.count)"
+      textField.placeholder = "number"
+    })
+    alert.addAction(UIAlertAction(title: "cancel", style: .cancel))
+    alert.addAction(UIAlertAction(title: "done",
+                                  style: .default,
+                                  handler: { _ in
+      if let title = alert.textFields?.first?.text {
+        let number = Int(alert.textFields?.last?.text ?? "1") ?? 1
+        let newCellModel = CellModel(title: title, count: number)
+        sectionReactor.action.onNext(.edit(cellReactor, newCellModel))
+        self.applySnapshot(animatingDifferrences: false)
+      }
+    }))
+    present(alert, animated: true)
+  }
+
+  private func showDeleteAlert(indexPath: IndexPath) {
+    guard let sectionReactor = currentSnapshot.sectionIdentifiers[safe: indexPath.section],
+          let cellReactor = sectionReactor.currentState.cellReactors[safe: indexPath.item]
+    else { return }
+
+    let alert = UIAlertController(title: nil,
+                                  message: "delete cell?",
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "cancel", style: .cancel))
+    alert.addAction(UIAlertAction(title: "done",
+                                  style: .default,
+                                  handler: { _ in
+      sectionReactor.action.onNext(.remove(cellReactor))
+      self.applySnapshot(animatingDifferrences: false)
     }))
     present(alert, animated: true)
   }

@@ -16,10 +16,30 @@ final class ImageTextCollectionViewCellReactor: Reactor {
   }
 
   enum Action {
+    case update(CellModel)
+  }
+
+  enum Mutation {
+    case update(CellModel)
   }
 
   struct State: Hashable {
-    let cellModel: CellModel
+    var cellModel: CellModel
+  }
+
+  func mutate(action: Action) -> Observable<Mutation> {
+    switch action {
+    case .update(let cellModel):
+      return .just(.update(cellModel))
+    }
+  }
+  func reduce(state: State, mutation: Mutation) -> State {
+    var state = state
+    switch mutation {
+    case .update(let cellModel):
+      state.cellModel = cellModel
+      return state
+    }
   }
 }
 

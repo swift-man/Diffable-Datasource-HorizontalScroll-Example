@@ -14,9 +14,17 @@ final class EditSectionsReusableView: UICollectionReusableView {
 
   var disposeBag = DisposeBag()
 
+  private let lineView = UIView().then {
+    $0.translatesAutoresizingMaskIntoConstraints = false
+    $0.backgroundColor = UIColor(named: "Text-Dark")
+  }
+
   private let plusButton = UIButton(type: .custom).then {
     $0.translatesAutoresizingMaskIntoConstraints = false
     $0.setImage(UIImage(systemName: "plus"), for: .normal)
+    $0.setTitle("Edit", for: .normal)
+    $0.setTitleColor(UIColor(named: "Text-Gray"), for: .normal)
+    $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
 
   lazy var plusButtonTap = plusButton.rx.tap
@@ -25,6 +33,7 @@ final class EditSectionsReusableView: UICollectionReusableView {
     super.init(frame: frame)
 
     backgroundColor = .systemBackground
+    configureLineView()
     configurePlusButton()
   }
 
@@ -41,13 +50,21 @@ final class EditSectionsReusableView: UICollectionReusableView {
 }
 
 extension EditSectionsReusableView {
+  private func configureLineView() {
+    addSubview(lineView)
+    NSLayoutConstraint.activate([
+      lineView.topAnchor.constraint(equalTo: topAnchor),
+      lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      lineView.heightAnchor.constraint(equalToConstant: 1)
+    ])
+  }
+
   private func configurePlusButton() {
     addSubview(plusButton)
     NSLayoutConstraint.activate([
       plusButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-      plusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-      plusButton.widthAnchor.constraint(equalToConstant: 23),
-      plusButton.heightAnchor.constraint(equalToConstant: 23)
+      plusButton.topAnchor.constraint(equalTo: topAnchor, constant: 30)
     ])
   }
 }
